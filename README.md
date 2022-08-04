@@ -20,16 +20,23 @@ The example application is a Human Resource Management site . It uses a API addr
 - Home page (URL: / )
     - Search box to filter user summaries by name and/or employee type
     - Table of user summaries
+    ![plot](./img/filter_user_summaries.png)
+    ![plot](./img/delete_user.png)
 - Save page (URL: /save )
     - Fields to imput user information
     - Ability to store the data into database
+    ![plot](./img/save_user.png)
 - Update page (URL: /update/:id )
     - Fields with values already in the database
     - Ability for users to change values and update user information data
+    - Ability to view the addresses for the user
     - id in URL represents the unique userID
+    ![plot](./img/address_list.png)
+    ![plot](./img/update_user_info.png)
 - Add Address page (URL: 'address/:id' )
     - Ability for users to input address data and upload it
     - id in URL represents the unique userID, the address will only be added under this userID
+    ![plot](./img/add_address.png)
 
 ## Improvements to the System
 
