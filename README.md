@@ -34,4 +34,5 @@ The example application is a Human Resource Management site . It uses a API addr
 ## Improvements to the System
 
 - There is a functional problem. When adding a new user to the database, we cannot add address at the same time. The addresses can only be added in the update page. This is due to the fact that address requires the information of the unique userID, which means it can only be added after the user is created. However, the tabs didn't restrict the users to input the addresses before user object is created. Due to time constriant of 24 hours, I did not manage to accomplish that requirement. I believe that can be improved in the future by restricting user access to input address data. Only after creating the user, can addresses be added to the newly created userID which can be included in the URL.
+- When deleting the user data, the addresses corresponding to this user are not deleted, which can be improved.
 - UI can be improved. Again, due to time constraint, it requires a lot of refinement to make the UI look prettier. 
