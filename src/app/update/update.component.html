@@ -1,0 +1,165 @@
+<head>
+    <meta charset="UTF-8">  
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous"> 
+</head>
+<body>
+    <!-- Use the tabs to choose view personal information or their addresses -->
+    <div class="tab">
+        <button class="tablinks" (click)="changePStyle()">Personal Info</button>
+        <button class="tablinks" (click)="changeAStyle()">Address</button>
+        <button class="tablinks">Payment</button>
+    </div>
+    
+    <!-- Tab content -->
+    <div id="Personal Info" [ngClass]="[personalStyle]">
+        <form #answerform = "ngForm" class="form-horizontal">
+            <!-- First Name -->
+            <div class="form-group">
+                <label class="control-label " for="usr">First Name*:</label>
+                <div class="col-sm-10">
+                  <input [(ngModel)]="firstName" name="firstName" type="text" class="form-control input" id="firstName">
+                </div>
+            </div><br>
+            <!-- Last Name -->
+            <div class="form-group">
+                <label class="control-label " for="usr">Last Name*:</label>
+                <div class="col-sm-10">
+                  <input [(ngModel)]="lastName" name="lastName" type="text" class="form-control input" id="lastName">
+                </div>
+            </div><br>
+            <!-- Email -->
+            <div class="form-group">
+                <label class="control-label " for="usr">Email*:</label>
+                <div class="col-sm-10">
+                  <input [(ngModel)]="email" name="email" type="text" class="form-control input" id="email">
+                </div>
+            </div>
+            <br>
+            <!-- User Type -->
+            <div class="form-group">
+                <label for="cars">User Type*:</label>
+                <select [(ngModel)]="userType" name="userType" class="form-select" name="userType" id="userType">
+                    <option value="select">Select</option>
+                    <option value="employee">Employee</option>
+                    <option value="consultant">Consultant</option>
+                </select>
+            </div>
+            <br>
+            <!-- Date of Birth -->
+            <div class="form-group">
+                <label for="cars">Date of Birth*:</label><br>
+                <input [(ngModel)]="dateOfBirth" matInput [matDatepicker]="picker" name="dateOfBirth">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+            </div><br>
+            <!-- Gender -->
+            <div class="form-group">
+                <label for="cars">Gender*:</label>
+                <select [(ngModel)]="gender" name="gender" class="form-select" name="gender" id="gender">
+                    <option value="select">Select</option>
+                    <option value="male">Male</option>
+                    <option value="female">Female</option>
+                    <option value="other">Other</option>
+                </select>
+            </div>
+            <br>
+            <!-- Mobile -->
+            <div class="form-group">
+                <label class="control-label " for="usr">Mobile*:</label>
+                <div class="col-sm-10">
+                  <input [(ngModel)]="mobilePhone" name="mobilePhone" type="text" class="form-control input" id="mobile">
+                </div>
+            </div><br>
+            <!-- Annual Salary -->
+            <div class="form-group">
+                <label class="control-label " for="usr">Annual Salary*:</label>
+                <div class="col-sm-10">
+                  <input [(ngModel)]="annualSalary" name="annualSalary" type="text" class="form-control input" id="annualSalary">
+                </div>
+            </div><br>
+            <!-- Hourly Rate -->
+            <div class="form-group">
+                <label class="control-label " for="usr">Hourly Rate: {{annualSalary/2080 | number:'1.0-2'}}</label>
+            </div><br>
+            <!-- Buttons for returning to homepage and for updating the data -->
+            <div style="display: inline;">                
+                <button (click)="return()" class="btn btn-primary">Return to Summary</button>
+                <button (click)="update()" class="btn btn-primary" style="float:right;">Update</button>
+            </div>
+
+        </form>
+    </div>
+    
+    <div id="Address" [ngClass]="[addressStyle]">
+        <!-- Button for adding the address -->
+        <div class="text-center">                
+            <button (click)="addAddress()" class="btn btn-primary" style="float:right;">Add address</button>
+        </div>
+        <!-- Table to show the address list for a user -->
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Address Name</th>
+                    <th>Address Type</th>
+                    <th>Address</th>
+                    <th>Location</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let address of addresses;index as i">
+                    <td>{{address.addrName}}</td>
+                    <td>{{address.addrType}}</td>
+                    <td>{{address.addrLn1}}, {{address.addrLn2}}</td>
+                    <td>{{address.city}}, {{address.stateCode}}, {{address.country}}</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="text-align">                
+            <button (click)="return()" class="btn btn-primary btn-sm">Return to Summary</button>
+        </div>
+    </div>
+
+    <style>
+        .tab {
+            overflow: hidden;
+            border: 1px solid #ccc;
+            background-color: #f1f1f1;
+        }
+
+        /* Style the buttons that are used to open the tab content */
+        .tab button {
+            background-color: inherit;
+            float: left;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            padding: 14px 16px;
+            transition: 0.3s;
+        }
+
+    /* Change background color of buttons on hover */
+        .tab button:hover {
+            background-color: #ddd;
+        }
+
+    /* Create an active/current tablink class */
+        .tab button.active {
+            background-color: #ccc;
+        }
+
+    /* Style the tab content */
+        .notChosen {
+            display:None;
+            padding: 6px 12px;
+            border: 1px solid #ccc;
+            border-top: none;
+        }
+        .chosen{
+            padding: 6px 12px;
+            border: 1px solid #ccc;
+            border-top: none;
+        }
+    </style>
+</body>
